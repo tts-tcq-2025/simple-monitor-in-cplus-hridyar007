@@ -1,5 +1,6 @@
 #include <assert.h>
 #include <iostream>
+using namespace std;
 
 bool TemperatureIsOk(float temperature) 
 {
