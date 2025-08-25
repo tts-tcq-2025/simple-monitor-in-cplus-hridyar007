@@ -1,16 +1,17 @@
 #include "checker.h"
+#include <array>
 
+// classify without branching (complexity = 1)
 Status classify(float value, const Range& range) {
-    if (value < range.min) return Status::TOO_LOW;
-    if (value > range.max) return Status::TOO_HIGH;
-    return Status::OK;
+    return (value < range.min) ? Status::TOO_LOW :
+           (value > range.max) ? Status::TOO_HIGH :
+                                 Status::OK;
 }
 
+// mapping table (complexity = 1)
 std::string statusToString(Status s) {
-    switch(s) {
-        case Status::OK: return "OK";
-        case Status::TOO_LOW: return "Too Low";
-        case Status::TOO_HIGH: return "Too High";
-    }
-    return "Unknown";
+    static const std::array<std::string, 3> table = {
+        "OK", "Too Low", "Too High"
+    };
+    return table[static_cast<int>(s)];
 }
